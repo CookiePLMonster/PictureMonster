@@ -31,3 +31,15 @@ void MainWindow::submitToScene()
     m_scene->addPixmap(QPixmap::fromImage(m_currentImage));
     ui->graphicsView->setScene(m_scene);
 }
+
+void MainWindow::on_actionNegative_triggered()
+{
+    m_applicator.applyEffect( EffectApplicator::EFFECT_NEGATIVE, m_currentImage );
+    submitToScene();
+}
+
+void MainWindow::on_actionSepia_triggered()
+{
+    m_applicator.applyEffect( EffectApplicator::EFFECT_SEPIA, m_currentImage );
+    submitToScene();
+}

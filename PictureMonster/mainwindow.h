@@ -5,6 +5,8 @@
 #include <QImage>
 #include <QGraphicsScene>
 
+#include "effectapplicator.h"
+
 namespace Ui {
 class MainWindow;
 }
@@ -20,6 +22,10 @@ public:
 private slots:
     void on_actionOpen_triggered();
 
+    void on_actionNegative_triggered();
+
+    void on_actionSepia_triggered();
+
 private:
     void submitToScene();
 
@@ -29,6 +35,8 @@ private:
     // Monster data
     QImage  m_currentImage;
     QGraphicsScene* m_scene;
+
+    EffectApplicator m_applicator;
 };
 
 #endif // MAINWINDOW_H
