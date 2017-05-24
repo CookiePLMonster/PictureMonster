@@ -41,6 +41,10 @@
     </property>
     <addaction name="actionNegative"/>
     <addaction name="actionSepia"/>
+    <addaction name="actionDesaturate"/>
+    <addaction name="separator"/>
+    <addaction name="actionPosterize"/>
+    <addaction name="actionMax_RGB"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuFilters"/>
@@ -67,6 +71,21 @@
   <action name="actionSepia">
    <property name="text">
     <string>Sepia</string>
+   </property>
+  </action>
+  <action name="actionPosterize">
+   <property name="text">
+    <string>Posterize</string>
+   </property>
+  </action>
+  <action name="actionMax_RGB">
+   <property name="text">
+    <string>Max RGB</string>
+   </property>
+  </action>
+  <action name="actionDesaturate">
+   <property name="text">
+    <string>Desaturate</string>
    </property>
   </action>
  </widget>

@@ -26,6 +26,12 @@ private slots:
 
     void on_actionSepia_triggered();
 
+    void on_actionPosterize_triggered();
+
+    void on_actionMax_RGB_triggered();
+
+    void on_actionDesaturate_triggered();
+
 private:
     void submitToScene();
 

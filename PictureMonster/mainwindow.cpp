@@ -28,6 +28,7 @@ void MainWindow::on_actionOpen_triggered()
 
 void MainWindow::submitToScene()
 {
+    m_scene->clear();
     m_scene->addPixmap(QPixmap::fromImage(m_currentImage));
     ui->graphicsView->setScene(m_scene);
 }
@@ -41,5 +42,24 @@ void MainWindow::on_actionNegative_triggered()
 void MainWindow::on_actionSepia_triggered()
 {
     m_applicator.applyEffect( EffectApplicator::EFFECT_SEPIA, m_currentImage );
+    submitToScene();
+}
+
+void MainWindow::on_actionPosterize_triggered()
+{
+    m_applicator.setPosterizationProperties(2);
+    m_applicator.applyEffect( EffectApplicator::EFFECT_POSTERIZE, m_currentImage );
+    submitToScene();
+}
+
+void MainWindow::on_actionMax_RGB_triggered()
+{
+    m_applicator.applyEffect( EffectApplicator::EFFECT_MAXRGB, m_currentImage );
+    submitToScene();
+}
+
+void MainWindow::on_actionDesaturate_triggered()
+{
+    m_applicator.applyEffect( EffectApplicator::EFFECT_DESATURATE, m_currentImage );
     submitToScene();
 }
