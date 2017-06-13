@@ -190,3 +190,11 @@ void MainWindow::on_actionMin_RGB_triggered()
 
     addUndo();
 }
+
+void MainWindow::on_actionBox_Blur_triggered()
+{
+    m_applicator.applyEffect( EffectApplicator::EFFECT_BOXBLUR, m_currentImage );
+    submitToScene();
+
+    addUndo();
+}

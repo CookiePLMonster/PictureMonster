@@ -49,6 +49,8 @@ private slots:
 
     void on_actionMin_RGB_triggered();
 
+    void on_actionBox_Blur_triggered();
+
 private:
     void onActionDesaturate(EffectApplicator::Desaturate technique);
 

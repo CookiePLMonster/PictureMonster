@@ -57,6 +57,8 @@
     <addaction name="actionPosterize"/>
     <addaction name="actionMax_RGB"/>
     <addaction name="actionMin_RGB"/>
+    <addaction name="separator"/>
+    <addaction name="actionBox_Blur"/>
    </widget>
    <widget class="QMenu" name="menuEdit">
     <property name="title">
@@ -155,6 +157,11 @@
   <action name="actionMin_RGB">
    <property name="text">
     <string>Min RGB</string>
+   </property>
+  </action>
+  <action name="actionBox_Blur">
+   <property name="text">
+    <string>Box Blur</string>
    </property>
   </action>
  </widget>

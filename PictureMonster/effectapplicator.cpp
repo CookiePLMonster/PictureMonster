@@ -90,6 +90,29 @@ void EffectApplicator::applyEffect(EffectApplicator::Effect effect, QImage &imag
             }
             break;
         }
+    case EFFECT_BOXBLUR:
+        {
+            const QImage orig = image;
+            int width = image.width();
+            int height = image.height();
+
+            for ( int h = 1; h < height-1; h++ )
+            {
+                QRgb* line = (QRgb*)image.scanLine(h);
+                const QRgb* prev = (const QRgb*)orig.constScanLine(h-1);
+                const QRgb* next = (const QRgb*)orig.constScanLine(h+1);
+
+                for ( int w = 1; w < width-1; w++ )
+                {
+                    uint red = ( qRed(line[w-1]) + qRed(line[w]) + qRed(line[w+1]) + qRed(prev[w-1]) + qRed(prev[w]) + qRed(prev[w+1]) + qRed(next[w-1]) + qRed(next[w]) + qRed(next[w+1]) ) / 9;
+                    uint green = ( qGreen(line[w-1]) + qGreen(line[w]) + qGreen(line[w+1]) + qGreen(prev[w-1]) + qGreen(prev[w]) + qGreen(prev[w+1]) + qGreen(next[w-1]) + qGreen(next[w]) + qGreen(next[w+1]) ) / 9;
+                    uint blue = ( qBlue(line[w-1]) + qBlue(line[w]) + qBlue(line[w+1]) + qBlue(prev[w-1]) + qBlue(prev[w]) + qBlue(prev[w+1]) + qBlue(next[w-1]) + qBlue(next[w]) + qBlue(next[w+1]) ) / 9;
+                    line[w] = qRgb(red, green, blue);
+                }
+            }
+
+            break;
+        }
     }
 }
 
@@ -119,4 +142,5 @@ uint EffectApplicator::desaturatePixel(uchar *pixel) const
     case DESATURATE_DECOMPMIN:
         return qMin(pixel[0], qMin(pixel[1], pixel[2]));
     }
+    return 0;
 }

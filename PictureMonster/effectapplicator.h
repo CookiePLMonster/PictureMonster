@@ -13,7 +13,9 @@ public:
         EFFECT_POSTERIZE,
         EFFECT_MAXRGB,
         EFFECT_MINRGB,
-        EFFECT_DESATURATE
+        EFFECT_DESATURATE,
+
+        EFFECT_BOXBLUR
     };
 
     enum Desaturate
