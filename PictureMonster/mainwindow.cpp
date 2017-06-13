@@ -26,6 +26,8 @@ void MainWindow::on_actionOpen_triggered()
     QString fileName = QFileDialog::getOpenFileName( this, tr("Open file"), QString(), tr("Images (*.png *.xpm *.jpg)") );
     m_currentImage.load( fileName );
 
+    addUndo();
+
     submitToScene();
 }
 
@@ -41,62 +43,72 @@ void MainWindow::addUndo()
     QTemporaryFile* file = new QTemporaryFile();
     if ( file->open() )
     {
-        QByteArray ba;
-        QBuffer buffer(&ba);
-        buffer.open(QIODevice::ReadWrite);
-        m_currentImage.save(&buffer, "PNG");
-
-        file->write(ba);
+        file->write(getCurrentImage());
         file->close();
 
         m_history.erase(m_historyCursor, m_history.end());
         m_history.append(QSharedPointer<QTemporaryFile>(file));
         m_historyCursor = m_history.end();
 
-        ui->actionUndo->setEnabled(true);
+        ui->actionUndo->setEnabled(m_history.size() > 1);
+        ui->actionRedo->setEnabled(false);
     }
+}
+
+QByteArray MainWindow::getCurrentImage()
+{
+    QByteArray ba;
+    QBuffer buffer(&ba);
+    buffer.open(QIODevice::ReadWrite);
+    m_currentImage.save(&buffer, "PNG");
+    return ba;
 }
 
 void MainWindow::on_actionNegative_triggered()
 {
-    addUndo();
     m_applicator.applyEffect( EffectApplicator::EFFECT_NEGATIVE, m_currentImage );
     submitToScene();
+
+    addUndo();
 }
 
 void MainWindow::on_actionSepia_triggered()
 {
-    addUndo();
     m_applicator.applyEffect( EffectApplicator::EFFECT_SEPIA, m_currentImage );
     submitToScene();
+
+    addUndo();
 }
 
 void MainWindow::on_actionPosterize_triggered()
 {
-    addUndo();
     m_applicator.setPosterizationProperties(2);
     m_applicator.applyEffect( EffectApplicator::EFFECT_POSTERIZE, m_currentImage );
     submitToScene();
+
+    addUndo();
 }
 
 void MainWindow::on_actionMax_RGB_triggered()
 {
-    addUndo();
     m_applicator.applyEffect( EffectApplicator::EFFECT_MAXRGB, m_currentImage );
     submitToScene();
+
+    addUndo();
 }
 
 void MainWindow::on_actionDesaturate_triggered()
 {
-    addUndo();
     m_applicator.applyEffect( EffectApplicator::EFFECT_DESATURATE, m_currentImage );
     submitToScene();
+
+    addUndo();
 }
 
 void MainWindow::on_actionUndo_triggered()
 {
     --m_historyCursor;
-    auto& file = (*m_historyCursor);
+    auto& file = (*(m_historyCursor-1));
     if ( file->open() )
     {
         m_currentImage.loadFromData(file->readAll());
@@ -104,8 +116,26 @@ void MainWindow::on_actionUndo_triggered()
 
         submitToScene();
     }
-    if ( m_historyCursor == m_history.begin() )
+    if ( (m_historyCursor-1) == m_history.begin() )
     {
         ui->actionUndo->setEnabled(false);
     }
+    ui->actionRedo->setEnabled(true);
+}
+
+void MainWindow::on_actionRedo_triggered()
+{
+    auto& file = (*(m_historyCursor++));
+    if ( file->open() )
+    {
+        m_currentImage.loadFromData(file->readAll());
+        file->close();
+
+        submitToScene();
+    }
+    if ( m_historyCursor == m_history.end() )
+    {
+        ui->actionRedo->setEnabled(false);
+    }
+    ui->actionUndo->setEnabled(true);
 }

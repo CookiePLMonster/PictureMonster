@@ -35,9 +35,13 @@ private slots:
 
     void on_actionUndo_triggered();
 
+    void on_actionRedo_triggered();
+
 private:
     void submitToScene();
     void addUndo();
+
+    QByteArray getCurrentImage();
 
 private:
     Ui::MainWindow *ui;
