@@ -47,6 +47,8 @@ private slots:
 
     void on_actionMin_Decomposition_triggered();
 
+    void on_actionMin_RGB_triggered();
+
 private:
     void onActionDesaturate(EffectApplicator::Desaturate technique);
 

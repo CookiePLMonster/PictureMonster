@@ -12,6 +12,7 @@ public:
         EFFECT_SEPIA,
         EFFECT_POSTERIZE,
         EFFECT_MAXRGB,
+        EFFECT_MINRGB,
         EFFECT_DESATURATE
     };
 

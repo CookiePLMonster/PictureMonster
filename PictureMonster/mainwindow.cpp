@@ -182,3 +182,11 @@ void MainWindow::on_actionMin_Decomposition_triggered()
 {
     onActionDesaturate(EffectApplicator::DESATURATE_DECOMPMIN);
 }
+
+void MainWindow::on_actionMin_RGB_triggered()
+{
+    m_applicator.applyEffect( EffectApplicator::EFFECT_MINRGB, m_currentImage );
+    submitToScene();
+
+    addUndo();
+}

@@ -56,6 +56,7 @@
     <addaction name="separator"/>
     <addaction name="actionPosterize"/>
     <addaction name="actionMax_RGB"/>
+    <addaction name="actionMin_RGB"/>
    </widget>
    <widget class="QMenu" name="menuEdit">
     <property name="title">
@@ -149,6 +150,11 @@
   <action name="actionMin_Decomposition">
    <property name="text">
     <string>Min Decomposition</string>
+   </property>
+  </action>
+  <action name="actionMin_RGB">
+   <property name="text">
+    <string>Min RGB</string>
    </property>
   </action>
  </widget>

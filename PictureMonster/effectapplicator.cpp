@@ -63,6 +63,21 @@ void EffectApplicator::applyEffect(EffectApplicator::Effect effect, QImage &imag
             }
             break;
         }
+    case EFFECT_MINRGB:
+        {
+            uchar* colors = image.bits();
+            uchar minVal = qMin( colors[0], qMin( colors[1], colors[2] ) );
+            for ( int i = 0; i < image.byteCount(); i += 4 )
+            {
+                colors[0] = colors[0] > minVal ? 0 : colors[0];
+                colors[1] = colors[1] > minVal ? 0 : colors[1];
+                colors[2] = colors[2] > minVal ? 0 : colors[2];
+
+                colors += 4;
+            }
+            break;
+        }
+
     case EFFECT_DESATURATE:
         {
             uchar* colors = image.bits();
