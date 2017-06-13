@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QImage>
 #include <QGraphicsScene>
+#include <QTemporaryFile>
 
 #include "effectapplicator.h"
 
@@ -32,8 +33,11 @@ private slots:
 
     void on_actionDesaturate_triggered();
 
+    void on_actionUndo_triggered();
+
 private:
     void submitToScene();
+    void addUndo();
 
 private:
     Ui::MainWindow *ui;
@@ -43,6 +47,9 @@ private:
     QGraphicsScene* m_scene;
 
     EffectApplicator m_applicator;
+
+    QList<QSharedPointer<QTemporaryFile>> m_history;
+    QList<QSharedPointer<QTemporaryFile>>::iterator m_historyCursor;
 };
 
 #endif // MAINWINDOW_H
