@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include "posterizedialog.h"
+
 #include <qfiledialog.h>
 #include <qbuffer.h>
 
@@ -82,11 +84,18 @@ void MainWindow::on_actionSepia_triggered()
 
 void MainWindow::on_actionPosterize_triggered()
 {
-    m_applicator.setPosterizationProperties(2);
-    m_applicator.applyEffect( EffectApplicator::EFFECT_POSTERIZE, m_currentImage );
-    submitToScene();
+    PosterizeDialog dialog;
+    dialog.setPixmap(m_currentImage);
 
-    addUndo();
+    int result = dialog.exec();
+    if ( result == QDialog::Accepted )
+    {
+        m_currentImage = dialog.getImage();
+        submitToScene();
+
+        addUndo();
+
+    }
 }
 
 void MainWindow::on_actionMax_RGB_triggered()

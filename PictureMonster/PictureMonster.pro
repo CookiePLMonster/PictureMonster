@@ -25,9 +25,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    effectapplicator.cpp
+    effectapplicator.cpp \
+    posterizedialog.cpp
 
 HEADERS  += mainwindow.h \
-    effectapplicator.h
+    effectapplicator.h \
+    posterizedialog.h \
+    previewdialog.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    posterizedialog.ui
