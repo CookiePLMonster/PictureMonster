@@ -31,15 +31,25 @@ private slots:
 
     void on_actionMax_RGB_triggered();
 
-    void on_actionDesaturate_triggered();
-
     void on_actionUndo_triggered();
 
     void on_actionRedo_triggered();
 
     void on_actionSave_triggered();
 
+    void on_actionAverage_triggered();
+
+    void on_actionLuma_triggered();
+
+    void on_actionDesaturate_2_triggered();
+
+    void on_actionMax_Decomposition_triggered();
+
+    void on_actionMin_Decomposition_triggered();
+
 private:
+    void onActionDesaturate(EffectApplicator::Desaturate technique);
+
     void submitToScene();
     void addUndo();
 

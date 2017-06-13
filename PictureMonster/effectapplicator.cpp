@@ -68,7 +68,7 @@ void EffectApplicator::applyEffect(EffectApplicator::Effect effect, QImage &imag
             uchar* colors = image.bits();
             for ( int i = 0; i < image.byteCount(); i += 4 )
             {
-                uint avg = (colors[0] + colors[1] + colors[2]) / 3;
+                uint avg = desaturatePixel(colors);
                 colors[0] = colors[1] = colors[2] = avg;
 
                 colors += 4;
@@ -87,4 +87,21 @@ EffectApplicator::EffectApplicator()
     : m_posterizationThresholds( 128 )
 {
 
+}
+
+uint EffectApplicator::desaturatePixel(uchar *pixel) const
+{
+    switch ( m_desaturateTechnique )
+    {
+    case DESATURATE_AVG:
+        return (pixel[0] + pixel[1] + pixel[2]) / 3;
+    case DESATURATE_LUMA:
+        return (pixel[0] * 0.114 + pixel[1] * 0.587 + pixel[2] * 0.299);
+    case DESATURATE_DES:
+        return ( qMin(pixel[0], qMin(pixel[1], pixel[2])) + qMax(pixel[0], qMax(pixel[1], pixel[2])) ) / 2;
+    case DESATURATE_DECOMPMAX:
+        return qMax(pixel[0], qMax(pixel[1], pixel[2]));
+    case DESATURATE_DECOMPMIN:
+        return qMin(pixel[0], qMin(pixel[1], pixel[2]));
+    }
 }

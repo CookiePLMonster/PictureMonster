@@ -40,9 +40,19 @@
     <property name="title">
      <string>Filters</string>
     </property>
+    <widget class="QMenu" name="menuDesaturate">
+     <property name="title">
+      <string>Desaturate...</string>
+     </property>
+     <addaction name="actionAverage"/>
+     <addaction name="actionLuma"/>
+     <addaction name="actionDesaturate_2"/>
+     <addaction name="actionMax_Decomposition"/>
+     <addaction name="actionMin_Decomposition"/>
+    </widget>
     <addaction name="actionNegative"/>
     <addaction name="actionSepia"/>
-    <addaction name="actionDesaturate"/>
+    <addaction name="menuDesaturate"/>
     <addaction name="separator"/>
     <addaction name="actionPosterize"/>
     <addaction name="actionMax_RGB"/>
@@ -84,17 +94,12 @@
   </action>
   <action name="actionPosterize">
    <property name="text">
-    <string>Posterize</string>
+    <string>Posterize...</string>
    </property>
   </action>
   <action name="actionMax_RGB">
    <property name="text">
     <string>Max RGB</string>
-   </property>
-  </action>
-  <action name="actionDesaturate">
-   <property name="text">
-    <string>Desaturate</string>
    </property>
   </action>
   <action name="actionUndo">
@@ -119,6 +124,31 @@
    </property>
    <property name="text">
     <string>Save</string>
+   </property>
+  </action>
+  <action name="actionAverage">
+   <property name="text">
+    <string>Average</string>
+   </property>
+  </action>
+  <action name="actionLuma">
+   <property name="text">
+    <string>Luma</string>
+   </property>
+  </action>
+  <action name="actionDesaturate_2">
+   <property name="text">
+    <string>Desaturate</string>
+   </property>
+  </action>
+  <action name="actionMax_Decomposition">
+   <property name="text">
+    <string>Max Decomposition</string>
+   </property>
+  </action>
+  <action name="actionMin_Decomposition">
+   <property name="text">
+    <string>Min Decomposition</string>
    </property>
   </action>
  </widget>

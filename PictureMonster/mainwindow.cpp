@@ -106,14 +106,6 @@ void MainWindow::on_actionMax_RGB_triggered()
     addUndo();
 }
 
-void MainWindow::on_actionDesaturate_triggered()
-{
-    m_applicator.applyEffect( EffectApplicator::EFFECT_DESATURATE, m_currentImage );
-    submitToScene();
-
-    addUndo();
-}
-
 void MainWindow::on_actionUndo_triggered()
 {
     --m_historyCursor;
@@ -155,4 +147,38 @@ void MainWindow::on_actionSave_triggered()
 
     QString fileName = QFileDialog::getSaveFileName( this, tr("Save file"), QString(), tr("Images (*.png *.xpm *.jpg)") );
     m_currentImage.save(fileName);
+}
+
+void MainWindow::on_actionAverage_triggered()
+{
+    onActionDesaturate(EffectApplicator::DESATURATE_AVG);
+}
+
+void MainWindow::on_actionLuma_triggered()
+{
+    onActionDesaturate(EffectApplicator::DESATURATE_LUMA);
+}
+
+void MainWindow::on_actionDesaturate_2_triggered()
+{
+    onActionDesaturate(EffectApplicator::DESATURATE_DES);
+}
+
+void MainWindow::onActionDesaturate(EffectApplicator::Desaturate technique)
+{
+    m_applicator.setDesaturationTechnique(technique);
+    m_applicator.applyEffect( EffectApplicator::EFFECT_DESATURATE, m_currentImage );
+    submitToScene();
+
+    addUndo();
+}
+
+void MainWindow::on_actionMax_Decomposition_triggered()
+{
+    onActionDesaturate(EffectApplicator::DESATURATE_DECOMPMAX);
+}
+
+void MainWindow::on_actionMin_Decomposition_triggered()
+{
+    onActionDesaturate(EffectApplicator::DESATURATE_DECOMPMIN);
 }

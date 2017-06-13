@@ -17,8 +17,11 @@ public:
 
     enum Desaturate
     {
-        DESATURATE_AVG
-
+        DESATURATE_AVG,
+        DESATURATE_LUMA,
+        DESATURATE_DES,
+        DESATURATE_DECOMPMAX,
+        DESATURATE_DECOMPMIN
     };
 
     void applyEffect(Effect effect, QImage& image);
@@ -29,6 +32,8 @@ public:
     EffectApplicator();
 
 private:
+    uint desaturatePixel(uchar* pixel) const;
+
     int m_posterizationThresholds;
 
     Desaturate m_desaturateTechnique = DESATURATE_AVG;
