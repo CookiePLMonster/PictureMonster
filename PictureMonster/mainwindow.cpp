@@ -139,3 +139,11 @@ void MainWindow::on_actionRedo_triggered()
     }
     ui->actionUndo->setEnabled(true);
 }
+
+void MainWindow::on_actionSave_triggered()
+{
+    if ( m_currentImage.isNull() ) return;
+
+    QString fileName = QFileDialog::getSaveFileName( this, tr("Save file"), QString(), tr("Images (*.png *.xpm *.jpg)") );
+    m_currentImage.save(fileName);
+}
